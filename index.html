@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>창업계획서 작성</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaf4fc;
+            overflow-x: auto; /* 가로 스크롤 활성화 */
+        }
+
+        .form-container {
+            background-color: white; /* 흰색 배경 */
+            width: 95%;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* 초과 내용 숨김 */
+            position: relative; /* 위치 지정 */
+        }
+
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: #0056b3;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            position: relative;
+            font-size: 20px;
+            font-weight: bold;
+            color: #0056b3;
+            margin: 30px 0 10px;
+            background-color: #eaf4fc; /* 배경색 */
+            display: inline; /* 텍스트 길이에 맞춤 */
+            padding: 5px 10px; /* 내부 여백 */
+            border-radius: 5px; /* 모서리 둥글게 */
+            margin-bottom: 10px; /* 아래 여백 */
+        }
+
+        h3 {
+            font-size: 16px; /* 폰트 크기 */
+            font-weight: bold; /* 폰트 두께 */
+            color: #032952; /* 텍스트 색상 */
+            margin-bottom: 10px; /* 아래 여백 */
+        }
+
+        h3::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: #007bff;
+            margin-top: 5px;
+        }
+
+        table {
+            width: 100%; /* 테이블 너비를 부모 요소에 맞게 설정 */
+            table-layout: fixed; /* 고정된 테이블 레이아웃 */
+            border-collapse: collapse; /* 테이블 경계선 겹침 제거 */
+            margin: 10px 0;
+            text-align: center;
+            word-wrap: break-word; /* 긴 단어 줄바꿈 */
+            margin-bottom: 25px; /* 아래 여백 */
+        }
+
+        th {
+            background-color: #007bff;
+            border: 1px solid #ccc;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            text-align: center; /* 테이블 셀 텍스트와 버튼을 가운데 정렬 */
+            vertical-align: middle; /* 버튼을 셀 중앙에 맞춤 */
+            overflow-wrap: break-word; /* 텍스트 줄바꿈 */
+        }
+
+        td.numeric {
+            text-align: right; /* 오른쪽 정렬 */
+            padding-right: 10px; /* 간격 추가 */
+        }
+
+        textarea.long-input {
+            width: 100%; /* 셀 너비에 맞게 조정 */
+            height: 100px;
+            padding: 6px;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            box-sizing: border-box; /* padding과 border 포함 */
+            resize: vertical; /* 사용자가 세로 크기만 조절 가능 */
+        }
+
+
+        input.short-input {
+            width: 67%;
+            height: 30px;
+            padding: 6px;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            box-sizing: border-box; /* padding과 border 포함 */
+        }
+
+        input.medium-input {
+            width: 75%;
+            height: 30px;
+            padding: 6px;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            box-sizing: border-box; /* padding과 border 포함 */
+        }
+
+        input.long-input {
+            width: 100%;
+            height: 30px;
+            padding: 6px;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            box-sizing: border-box; /* padding과 border 포함 */
+        }
+
+        input[type="number"] {
+            text-align: right;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004b8a;
+        }
+
+        .banner {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .delete-btn {
+            background-color: #ff6347; /* 삭제 버튼 배경색 (토마토 색) */
+            color: white; /* 버튼 글자색 */
+            border: none; /* 테두리 제거 */
+            border-radius: 5px; /* 둥근 모서리 */
+            cursor: pointer; /* 클릭할 수 있는 커서 */
+            font-size: 14px; /* 글자 크기 */
+            margin-top: 0; /* 상단 여백 제거 */
+            margin-bottom: 0; /* 하단 여백 제거 */
+            padding: 5px 10px; /* 버튼 내부 여백 */
+        }
+
+        .delete-btn:hover {
+            background-color: #e04e3f; /* 호버 시 어두운 빨강 */
+        }
+
+        .banner-description {
+            text-align: center; /* 가운데 정렬 */
+            font-size: 16px; /* 폰트 크기 */
+            color: #555; /* 텍스트 색상 */
+            margin-top: -10px; /* 배너와 텍스트 간격 조정 */
+            margin-bottom: 20px; /* 다음 요소와의 간격 */
+            line-height: 1.5; /* 줄 간격 */
+        }
+
+        #preview-container {
+            font-family: 'Nanum Gothic', sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        #preview-container table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+        }
+
+        #preview-container table th,
+        #preview-container table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #preview-container table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        #preview-container td.numeric {
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        #preview-container .delete-btn {
+            display: none; /* 미리보기에서 삭제 버튼 숨김 */
+        }
+
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;  /* 16px * 1.5 = 24px */
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            th, td {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            input, textarea {
+                padding: 4px;
+                font-size: 0.7rem;
+            }
+
+            button {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+        }
+
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 1.4rem;
+                }
+            
+                h2 {
+                    font-size: 1.1rem;
+                }
+            
+                th, td {
+                    font-size: 0.85rem;
+                    padding: 8px;
+                }
+            
+                input, textarea {
+                    padding: 5px;
+                    font-size: 0.75rem;
+                }
+            
+                button {
+                    font-size: 0.85rem;
+                    padding: 8px 14px;
+                }
+            }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <!-- JPG 배너 이미지 -->
+        <img src="banner.jpg" alt="창업계획서 배너" class="banner">
+
+        <!-- 1. 창업 아이템 및 업종 -->
+        <div class="form-section">
+            <h2>1. 창업 아이템 및 업종</h2>
+            <table>
+                <tr>
+                    <th>항목</th>
+                    <th>내용</th>
+                </tr>
+                <tr>
+                    <td>창업 기업명</td>
+                    <td><input type="text" id="company" class="long-input" placeholder="예: (주)에이블"></td>
+                </tr>
+                <tr>
+                    <td>학번 이름</td>
+                    <td><input type="text" id="student" class="long-input" placeholder="예: 10101 홍길동, 30719 송다윤"></td>
+                </tr>
+                <tr>
+                    <td>위치</td>
+                    <td><input type="text" id="location" class="long-input" id="item" placeholder="예: 대전 서구 도안동"></td>
+                </tr>
+                <tr>
+                    <td>업종</td>
+                    <td><input type="text" id="industry" class="long-input" id="item1" placeholder="예: 교육 > 교육 지원 > 기타 교육지원 서비스업"></td>
+                </tr>
+            </table>
+        </div><br>
+
+        <!-- 2. 상권 분석 -->
+        <div class="form-section">
+            <h2>2. 상권 분석</h2>
+            <table>
+                <tr>
+                    <th>항목</th>
+                    <th>월 평균 매출</th>
+                    <th>선택업종 업소수</th>
+                    <th>일 평균 유동인구</th>
+                    <th>유동인구 많은 요일</th>
+                    <th>유동인구 많은 시간대</th>
+                </tr>
+                <tr>
+                    <td>값</td>
+                    <td class="numeric"><input type="number" id="avgSales" placeholder="" class="short-input"><span> 만원</span></td>
+                    <td class="numeric"><input type="number" id="storeCount" placeholder="" class="short-input"><span> 개</span></td>
+                    <td class="numeric"><input type="number" id="dailyFootTraffic" placeholder="" class="short-input"><span> 명</span></td>
+                    <td><input type="text" placeholder="" class="long-input" id="peakDay"></td>
+                    <td><input type="text" placeholder="" class="long-input" id="peakHour"></td>
+                </tr>
+            </table>
+        </div><br>
+
+        <!-- 4. 선정 및 판매 기준 이유 -->
+        <div class="form-section">
+            <h2>3. 창업 계획</h2>
+            <table>
+                <tr>
+                    <th style="width: 50%;">창업 제품/서비스 설명</th>
+                    <th style="width: 50%;">선택한 업종과 상권의 특징 및 장점은?</th>
+                </tr>
+                <tr>
+                    <td><textarea id="reasonIndustry" rows="5" class="long-input" placeholder="선택한 제품/서비스의 설명을 자유롭게 작성하세요"></textarea></td>
+                    <td><textarea id="financeReason" rows="5" class="long-input" placeholder="자유롭게 작성하세요"></textarea></td>
+                </tr>
+                <tr>
+                    <th style="width: 50%;">자신(CEO)의 창업 전략 및 강점은?</th>
+                    <th style="width: 50%;">판매 계획을 책정한 기준과 그 이유는?</th>
+                </tr>
+                <tr>
+                    <td><textarea id="reasonIndustry1" rows="5" class="long-input" placeholder="창업인원, 홍보 방법 등에 대해 자유롭게 작성하세요"></textarea></td>
+                    <td><textarea id="financeReason1" rows="5" class="long-input" placeholder="자유롭게 작성하세요"></textarea></td>
+                </tr>
+            </table>
+
+
+        <!-- 3. 판매 계획 -->
+        <div class="form-section">
+            <h2>4. 판매 계획</h2>
+            <table id="finance-table">
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>비용</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="항목 입력" class="long-input"></td>
+                        <td class="numeric"><input type="number" placeholder="숫자 입력" class="medium-input"><span> 원</span></td>
+                        <td><button class="delete-btn" onclick="deleteRow(this)">삭제</button></td>
+                    </tr>    
+                </tbody>
+            </table>
+            <div style="text-align: center; margin-top: 20px;">
+            <button onclick="addRow()">항목 추가</button></div>
+        </div>
+
+        <br><br>
+        </div>
+        <p class="banner-description">
+            ----- 작성한 내용 확인 후 아래 <strong>'버튼'</strong>을 눌러 이미지를 저장해주세요! ----- 
+        </p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="saveFormAsImage()">이미지로 저장</button>
+            </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+         <script>
+        function formatNumber(value) {
+            // 입력된 값이 숫자가 아닐 경우 그대로 반환
+            if (isNaN(value) || value.trim() === '') return '';
+            return parseInt(value, 10).toLocaleString(); // 1,000 단위 쉼표 추가
+        }
+
+            function addRow() {
+                const tableBody = document.querySelector('#finance-table tbody');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="text" placeholder="항목 입력" class="long-input"></td>
+                    <td class="numeric"><input type="number" placeholder="숫자 입력" class="medium-input"><span> 원</span></td>
+                    <td><button class="delete-btn" onclick="deleteRow(this)">삭제</button></td>
+                `;
+                tableBody.appendChild(row);
+            }
+
+            function deleteRow(button) {
+                const row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+
+            function previewData() {
+                const company = document.getElementById('company').value.trim();
+                const student = document.getElementById('student').value.trim();
+                const item = document.getElementById('item').value.trim();
+                const reasonIndustry = document.getElementById('reasonIndustry').value.trim();
+                const reasonFinance = document.getElementById('financeReason').value.trim();
+
+                // ✅ '상권 분석' 데이터 수집
+                const marketInputs = document.querySelectorAll('.form-section:nth-of-type(2) input');
+                const marketRows = `
+                    <tr>
+                        <td>값</td>
+                        <td class="numeric">${marketInputs[0].value.trim() || '0'} 개</td>
+                        <td class="numeric">${marketInputs[1].value.trim() || '0'} %</td>
+                        <td class="numeric">${marketInputs[2].value.trim() || '0'} 개</td>
+                        <td class="numeric">${marketInputs[3].value.trim() || '0'} %</td>
+                    </tr>
+                    <tr>
+                        <td>값</td>
+                        <td class="numeric">${marketInputs[4].value.trim() || '0'} 원</td>
+                        <td class="numeric">${marketInputs[5].value.trim() || '0'} %</td>
+                        <td class="numeric">${marketInputs[6].value.trim() || '0'} 건</td>
+                        <td class="numeric">${marketInputs[7].value.trim() || '0'} %</td>
+                    </tr>
+                `;
+
+                const financeRows = document.querySelectorAll('#finance-table tbody tr');
+                let financeContent = '';
+                financeRows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const labelInput = cells[0].querySelector('input');
+                    const valueInput = cells[1].querySelector('input');
+                    const label = labelInput ? labelInput.value.trim() : '';
+                    const value = valueInput ? formatNumber(valueInput.value.trim()) : '0';
+
+                    financeContent += `
+                        <tr>
+                            <td>${label || '-'}</td>
+                            <td class="numeric">${value} 원</td>
+                        </tr>
+                    `;
+                });
+
+            }
+
+function saveFormAsImage() {
+    const formSections = document.querySelectorAll(".form-section");
+
+    // 🔵 A4 비율 기반 컨테이너 생성
+    const target = document.createElement("div");
+    target.style.backgroundColor = "#ffffff";
+    target.style.padding = "40px";
+    target.style.width = "794px";          // A4 가로(px) = 21cm * 96dpi
+    target.style.minHeight = "1123px";     // A4 세로(px) = 29.7cm * 96dpi
+    target.style.fontFamily = "'Nanum Gothic', sans-serif";
+    target.style.boxSizing = "border-box";
+
+    formSections.forEach(section => {
+        const cloned = section.cloneNode(true);
+
+        // textarea → div
+        const textareas = cloned.querySelectorAll("textarea");
+        textareas.forEach(textarea => {
+            const div = document.createElement("div");
+            div.style.border = "1px solid #ccc";
+            div.style.padding = "10px";
+            div.style.minHeight = "150px";
+            div.style.whiteSpace = "pre-wrap";
+            div.style.fontSize = "14px";
+            div.innerText = textarea.value;
+            textarea.parentNode.replaceChild(div, textarea);
+        });
+
+        // number input → span
+        const numberInputs = cloned.querySelectorAll('input[type="number"]');
+        numberInputs.forEach(input => {
+            const span = document.createElement("span");
+            const value = input.value.trim();
+            span.innerText = value ? parseInt(value).toLocaleString() : '';
+            span.style.fontSize = "14px";
+            input.parentNode.replaceChild(span, input);
+        });
+
+        // text input → span
+        const textInputs = cloned.querySelectorAll('input[type="text"]');
+        textInputs.forEach(input => {
+            const span = document.createElement("span");
+            span.innerText = input.value.trim();
+            span.style.fontSize = "14px";
+            input.parentNode.replaceChild(span, input);
+        });
+
+        // "관리" 열 제거
+        cloned.querySelectorAll("table").forEach(table => {
+            const thead = table.querySelector("thead");
+            const tbody = table.querySelector("tbody");
+
+            if (thead) {
+                const ths = thead.querySelectorAll("th");
+                ths.forEach((th, index) => {
+                    if (th.innerText.trim() === "관리") {
+                        th.remove();
+                        if (tbody) {
+                            tbody.querySelectorAll("tr").forEach(row => {
+                                const tds = row.querySelectorAll("td");
+                                if (tds[index]) tds[index].remove();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        // "항목 추가" 버튼 제거
+        const addRowBtn = cloned.querySelector('button[onclick="addRow()"]');
+        if (addRowBtn) {
+            addRowBtn.remove();
+        }
+
+        target.appendChild(cloned);
+    });
+
+    // 이미지로 캡처 및 저장
+    document.body.appendChild(target);
+    window.scrollTo(0, 0);
+
+    html2canvas(target, {
+        backgroundColor: '#ffffff',
+        useCORS: true,
+        scale: 2
+    }).then(canvas => {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        if (isIOS) {
+            // 🔵 iOS: 새 탭에 이미지 띄우기
+            const dataURL = canvas.toDataURL("image/png");
+            const newTab = window.open();
+            if (newTab) {
+                newTab.document.body.style.margin = '0';
+                const img = newTab.document.createElement("img");
+                img.src = dataURL;
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+                newTab.document.body.appendChild(img);
+            } else {
+                alert("팝업 차단 설정을 해제해주세요.");
+            }
+        } else {
+            // 🔵 PC/안드로이드: 자동 다운로드
+            const link = document.createElement("a");
+            link.href = canvas.toDataURL("image/png");
+            link.download = "창업계획서.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        document.body.removeChild(target);
+    }).catch(err => {
+        console.error("html2canvas 에러:", err);
+        alert("이미지 저장 중 문제가 발생했습니다.");
+        document.body.removeChild(target);
+    });
+}
+
+        </script>
+
+    </div>
+</body>
+</html>
