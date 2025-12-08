@@ -250,6 +250,9 @@
             box-sizing: border-box;
         }
 
+        .cost-input {
+            text-align: right;
+        }
 
         /* 반응형 디자인 */
         @media (max-width: 768px) {
@@ -404,7 +407,10 @@
                 <tbody>
                     <tr>
                         <td><input type="text" placeholder="항목 입력" class="long-input"></td>
-                        <td class="numeric"><input type="number" placeholder="숫자 입력" class="medium-input"><span> 원</span></td>
+                        <td class="numeric">    
+                        <input type="text" placeholder="숫자 입력" class="medium-input cost-input" oninput="handleCostInput(this)">
+                        <span> 원</span>
+                    </td>
                         <td><button class="delete-btn" onclick="deleteRow(this)">삭제</button></td>
                     </tr>    
                 </tbody>
@@ -426,22 +432,42 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
          <script>
-        function formatNumber(value) {
-            // 입력된 값이 숫자가 아닐 경우 그대로 반환
-            if (isNaN(value) || value.trim() === '') return '';
-            return parseInt(value, 10).toLocaleString(); // 1,000 단위 쉼표 추가
-        }
+            function formatNumber(value) {
+                value = value.replace(/,/g, '').trim(); // 쉼표 제거
+                if (isNaN(value) || value === '') return '';
+                return Number(value).toLocaleString();
+            }
 
+            // 🔹 비용 입력 시 1,000단위 쉼표 붙이는 함수
+            function handleCostInput(input) {
+                // 1) 숫자만 남기기
+                let digits = input.value.replace(/[^\d]/g, '');  // 숫자 아닌 것 제거
+
+                // 2) 아무것도 없으면 빈칸
+                if (!digits) {
+                    input.value = '';
+                    return;
+                }
+
+                // 3) 숫자로 바꿔서 1,000 단위 쉼표 적용
+                input.value = Number(digits).toLocaleString();
+            }
             function addRow() {
                 const tableBody = document.querySelector('#finance-table tbody');
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><input type="text" placeholder="항목 입력" class="long-input"></td>
-                    <td class="numeric"><input type="number" placeholder="숫자 입력" class="medium-input"><span> 원</span></td>
+                    <td class="numeric">
+                        <input type="text" placeholder="숫자 입력"
+                            class="medium-input cost-input"
+                            oninput="handleCostInput(this)">
+                        <span> 원</span>
+                    </td>
                     <td><button class="delete-btn" onclick="deleteRow(this)">삭제</button></td>
                 `;
                 tableBody.appendChild(row);
             }
+
 
             function deleteRow(button) {
                 const row = button.parentNode.parentNode;
@@ -536,8 +562,9 @@ if (totalHeight > 1123) {
         const numberInputs = cloned.querySelectorAll('input[type="number"]');
         numberInputs.forEach(input => {
             const span = document.createElement("span");
-            const value = input.value.trim();
-            span.innerText = value ? parseInt(value).toLocaleString() : '';
+            const raw = input.value.replace(/,/g, '').trim();
+            span.innerText = raw ? Number(raw).toLocaleString() : '';
+
             span.style.fontSize = "14px";
             input.parentNode.replaceChild(span, input);
         });
@@ -630,3 +657,4 @@ if (totalHeight > 1123) {
     </div>
 </body>
 </html>
+
