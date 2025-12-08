@@ -221,6 +221,36 @@
         }
 
 
+        /* 1번 창업 아이템 및 업종용 그리드 레이아웃 */
+        .startup-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 */
+            gap: 12px 20px;
+            margin: 10px 0 25px;
+        }
+
+        .startup-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .startup-item label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #032952;
+        }
+
+        .startup-item input {
+            width: 100%;
+            height: 30px;
+            padding: 6px;
+            border: 1px solid #b8daff;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
         /* 반응형 디자인 */
         @media (max-width: 768px) {
             .form-container {
@@ -275,6 +305,8 @@
                     padding: 8px 14px;
                 }
             }
+
+
     </style>
 </head>
 <body>
@@ -283,32 +315,34 @@
         <!-- JPG 배너 이미지 -->
         <img src="banner.jpg" alt="창업계획서 배너" class="banner">
 
-        <!-- 1. 창업 아이템 및 업종 -->
-        <div class="form-section">
-            <h2>1. 창업 아이템 및 업종</h2>
-            <table>
-                <tr>
-                    <th>항목</th>
-                    <th>내용</th>
-                </tr>
-                <tr>
-                    <td>창업 기업명</td>
-                    <td><input type="text" id="company" class="long-input" placeholder="예: (주)에이블"></td>
-                </tr>
-                <tr>
-                    <td>학번 이름</td>
-                    <td><input type="text" id="student" class="long-input" placeholder="예: 10101 홍길동, 30719 송다윤"></td>
-                </tr>
-                <tr>
-                    <td>위치</td>
-                    <td><input type="text" id="location" class="long-input" id="item" placeholder="예: 대전 서구 도안동"></td>
-                </tr>
-                <tr>
-                    <td>업종</td>
-                    <td><input type="text" id="industry" class="long-input" id="item1" placeholder="예: 교육 > 교육 지원 > 기타 교육지원 서비스업"></td>
-                </tr>
-            </table>
-        </div><br>
+
+        <h2>1. 창업 아이템 및 업종</h2>
+        <table class="form-section">
+            <tr>
+                <th>창업 기업명</th>
+                <th>학번 이름</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="company" placeholder="예: (주)에이블" class="long-input">
+                </td>
+                <td>
+                    <input type="text" id="student" placeholder="예: 10101 홍길동, 30719 송다윤" class="long-input">
+                </td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <th>업종</th>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="location" placeholder="예: 대전 서구 도안동" class="long-input">
+                </td>
+                <td>
+                    <input type="text" id="industry" placeholder="예: 교육 > 교육 지원 > 기타 교육지원 서비스업" class="long-input">
+                </td>
+            </tr>
+        </table>
 
         <!-- 2. 상권 분석 -->
         <div class="form-section">
@@ -354,8 +388,7 @@
                     <td><textarea id="financeReason1" rows="5" class="long-input" placeholder="자유롭게 작성하세요"></textarea></td>
                 </tr>
             </table>
-            </div> 
-
+        </div> 
 
         <!-- 3. 판매 계획 -->
         <div class="form-section">
@@ -378,10 +411,10 @@
             </table>
             <div style="text-align: center; margin-top: 20px;">
             <button onclick="addRow()">항목 추가</button></div>
-        </div>
-
+        
         <br><br>
         </div>
+     
         <p class="banner-description">
             ----- 작성한 내용 확인 후 아래 <strong>'버튼'</strong>을 눌러 이미지를 저장해주세요! ----- 
         </p>
@@ -467,8 +500,19 @@ function saveFormAsImage() {
     const target = document.createElement("div");
     target.style.backgroundColor = "#ffffff";
     target.style.padding = "40px";
-    target.style.width = "794px";          // A4 가로(px) = 21cm * 96dpi
-    target.style.minHeight = "1123px";     // A4 세로(px) = 29.7cm * 96dpi
+
+const totalHeight = document.body.scrollHeight;
+
+if (totalHeight > 1123) {
+    // ✅ 내용 많으면 A4 가로
+    target.style.width = "1123px";
+    target.style.minHeight = "794px";
+} else {
+    // ✅ 기본 A4 세로
+    target.style.width = "794px";
+    target.style.minHeight = "1123px";
+}
+
     target.style.fontFamily = "'Nanum Gothic', sans-serif";
     target.style.boxSizing = "border-box";
 
@@ -566,7 +610,8 @@ function saveFormAsImage() {
             // 🔵 PC/안드로이드: 자동 다운로드
             const link = document.createElement("a");
             link.href = canvas.toDataURL("image/png");
-            link.download = "창업계획서.png";
+            const companyName = document.getElementById("company").value.trim() || "창업계획서";
+            link.download = companyName + ".png";
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -585,4 +630,3 @@ function saveFormAsImage() {
     </div>
 </body>
 </html>
-
